@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:43 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/05/03 22:42:48 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/05/05 20:26:16 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,22 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
-# define BUFFER_SIZE 1024
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
+
+// # define DEBUG
 
 char	*get_next_line(int fd);
-
+void	*gnl_realloc(void *ptr, size_t size);
+int		gnl_strncat(char **dst, char *src, int *line_size);
+int		gnl_read(int fd, char **line, int *line_size, char *buf);
+void	gnl_bzero(char *buf, size_t size);
 
 #endif

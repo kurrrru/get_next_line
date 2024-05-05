@@ -6,13 +6,16 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:34 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/05/05 21:57:16 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/05/05 22:32:48 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
+// buf_init: Initialize buf if it is not initialized.
+// After memory allocation, initialize the memory with '\0'.
+// Return: whether the initialization is successful. (1: success, -1: error)
 int	buf_init(char **buf)
 {
 	if (*buf)
@@ -47,11 +50,11 @@ void	*gnl_realloc(void *ptr, size_t new_size, size_t old_size)
 	return (new_ptr);
 }
 
-// gnl_strncat: Concatenate src to dst with a limit of BUFFER_SIZE characters.
-// Encountering '\n' in src stops concatenation. ('\n' is copied.)
-// If the new_size of dst is not enough, it is reallocated.
-// Return: the number of characters concatenated.
-int	gnl_strncat(char **dst, char *src, int *line_size, int *cat_size)
+// gnl_strncat: Concatenate src to dst.
+// If the new_size of dst is not enough, it is reallocated in gnl_realloc.
+// The size of the concatenated string of src is stored in cat_size.
+// Return: the size of the concatenated string of src.
+int	gnl_strncat(char **dst, const char *src, int *line_size, int *cat_size)
 {
 	int	i;
 	int	j;
@@ -77,6 +80,8 @@ int	gnl_strncat(char **dst, char *src, int *line_size, int *cat_size)
 	return (j);
 }
 
+// gnl_bzero: Initialize buf with '\0'.
+// Return: None
 void	gnl_bzero(char *buf, size_t new_size)
 {
 	while (new_size--)
@@ -84,8 +89,10 @@ void	gnl_bzero(char *buf, size_t new_size)
 }
 
 // gnl_read: Read from fd to buf and concatenate buf to line.
-// If the new_size of line is not enough, it is reallocated in gnl_strncat.
-// Return: whether the reading is successful. (1: success, -1: error)
+// If line is not empty, concatenate buf to line.
+// If '\n' is not found in buf, read until '\n' is found or EOF is reached.
+// Move the characters after first '\n' to the beginning of buf.
+// Return: whether the reading is successful. (1: success, 0: EOF, -1: error)
 int	gnl_read(int fd, char **line, int *line_size, char *buf)
 {
 	int			read_size;

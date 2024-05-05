@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:39 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/05/05 20:44:10 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/05/05 22:02:54 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,8 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (buf == NULL)
-	{
-		buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-		if (buf == NULL)
-			return (NULL);
-		gnl_bzero(buf, BUFFER_SIZE);
-	}
+	if (buf_init(&buf) == -1)
+		return (NULL);
 	line_size = BUFFER_SIZE + 1;
 	line = (char *)malloc(line_size * sizeof(char));
 	if (line == NULL)
@@ -46,50 +41,47 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int main()
-{
-	char *filename = "test.txt";
-	int fd = open(filename, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("open");
-		return 1;
-	}
-
-	char	*line;
-	while (*(line = get_next_line(fd)))
-	{
-		printf("result: %s\n", line);
-		free(line);
-	}
-	free(line);
-	if (close(fd) == -1)
-	{
-		perror("close");
-		return 1;
-	}
-	// do the same thing with test2.txt
-	filename = "test2.txt";
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("open");
-		return 1;
-	}
-
-	while (*(line = get_next_line(fd)))
-	{
-		printf("result: %s\n", line);
-		free(line);
-	}
-	free(line);
-	if (close(fd) == -1)
-	{
-		perror("close");
-		return 1;
-	}
-
-	
-
-	return 0;
-}
+// int main()
+// {
+// 	char *filename = "test.txt";
+// 	char	*line;
+// 	int fd = open(filename, O_RDONLY);
+// 	if (fd == -1)
+// 	{
+// 		perror("open");
+// 		return 1;
+// 	}
+// 	while (*(line = get_next_line(fd)) && *line)
+// 	{
+// 		printf("result: %s\n", line);
+// 		free(line);
+// 	}
+// 	free(line);
+// 	if (close(fd) == -1)
+// 	{
+// 		perror("close");
+// 		return 1;
+// 	}
+// 	// do the same thing with test2.txt
+// 	filename = "test2.txt";
+// 	fd = open(filename, O_RDONLY);
+// 	if (fd == -1)
+// 	{
+// 		perror("open");
+// 		return 1;
+// 	}
+// 	line = get_next_line(0);
+// 	while (line && *line)
+// 	{
+// 		printf("result: %s\n", line);
+// 		free(line);
+// 		line = get_next_line(0);
+// 	}
+// 	free(line);
+// 	if (close(fd) == -1)
+// 	{
+// 		perror("close");
+// 		return 1;
+// 	}
+// 	return 0;
+// }

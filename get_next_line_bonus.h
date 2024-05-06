@@ -35,4 +35,3 @@ int		gnl_read(int fd, char **line, int *line_size, char *buf);
 void	gnl_bzero(char *buf, size_t size);
 
 #endif
-

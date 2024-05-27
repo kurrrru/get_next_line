@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:39 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/05/05 22:28:31 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/05/27 23:32:04 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_next_line(int fd)
 	{
 		free(buf);
 		buf = NULL;
-		if (flag == -1)
+		if (flag == -1 || line[0] == '\0')
 			return (free(line), NULL);
 	}
 	return (line);

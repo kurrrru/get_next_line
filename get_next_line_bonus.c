@@ -29,7 +29,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line_size = BUFFER_SIZE + 1;
 	line = (char *)malloc(line_size * sizeof(char));
-	if (line == NULL)
+	if (!line)
 	{
 		free(buf[fd]);
 		buf[fd] = NULL;

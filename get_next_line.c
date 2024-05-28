@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:39 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/05/27 23:32:04 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:30:41 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ char	*get_next_line(int fd)
 	int			line_size;
 	int			flag;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
-		return (NULL);
-	if (buf_init(&buf) == -1)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || buf_init(&buf) == -1)
 		return (NULL);
 	line_size = BUFFER_SIZE + 1;
 	line = (char *)malloc(line_size * sizeof(char));
 	if (line == NULL)
+	{
+		free(buf);
+		buf = NULL;
 		return (NULL);
+	}
 	gnl_bzero(line, line_size);
 	flag = gnl_read(fd, &line, &line_size, buf);
 	if (flag == -1 || flag == 0)

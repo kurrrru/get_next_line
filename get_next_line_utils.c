@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:34 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/05/05 22:32:48 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:37:41 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	gnl_read(int fd, char **line, int *line_size, char *buf)
 	int			i;
 
 	cat_size = 0;
-	if (line[0])
-		cat_size = gnl_strncat(line, buf, line_size, &cat_size);
+	if (line[0] && gnl_strncat(line, buf, line_size, &cat_size) == -1)
+		return (-1);
 	if (!buf[cat_size] && (cat_size == 0 || buf[cat_size - 1] != '\n'))
 	{
 		while (1)

@@ -25,14 +25,16 @@ char	*get_next_line(int fd)
 	int			line_size;
 	int			flag;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
-		return (NULL);
-	if (buf_init(&(buf[fd])) == -1)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || buf_init(buf + fd) < 0)
 		return (NULL);
 	line_size = BUFFER_SIZE + 1;
 	line = (char *)malloc(line_size * sizeof(char));
 	if (line == NULL)
+	{
+		free(buf[fd]);
+		buf[fd] = NULL;
 		return (NULL);
+	}
 	gnl_bzero(line, line_size);
 	flag = gnl_read(fd, &line, &line_size, buf[fd]);
 	if (flag == -1 || flag == 0)

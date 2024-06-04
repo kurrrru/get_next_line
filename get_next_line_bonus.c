@@ -44,5 +44,5 @@ char	*get_next_line(int fd)
 		if (flag == -1 || line[0] == '\0')
 			return (free(line), NULL);
 	}
-	return (line);
+	return (gnl_realloc(line, 0, line_size));
 }

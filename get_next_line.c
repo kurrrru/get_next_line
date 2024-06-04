@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:39 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/05/28 13:37:29 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/06/04 20:35:41 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ char	*get_next_line(int fd)
 		if (flag == -1 || line[0] == '\0')
 			return (free(line), NULL);
 	}
-	return (line);
+	return (gnl_realloc(line, 0, line_size));
 }

@@ -36,11 +36,14 @@ void	*gnl_realloc(void *ptr, size_t new_size, size_t old_size)
 	void	*new_ptr;
 	size_t	i;
 
+	if (new_size == 0)
+		while (new_size == 0 || ((char *)ptr)[new_size - 1])
+			new_size++;
 	new_ptr = malloc(new_size);
 	if (new_ptr == NULL)
 		return (free(ptr), NULL);
 	i = 0;
-	while (i < old_size)
+	while (i < old_size && i < new_size)
 	{
 		((char *)new_ptr)[i] = ((char *)ptr)[i];
 		i++;

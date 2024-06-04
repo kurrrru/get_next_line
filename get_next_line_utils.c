@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:34 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/06/04 16:55:15 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/06/04 20:34:21 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,14 @@ void	*gnl_realloc(void *ptr, size_t new_size, size_t old_size)
 	void	*new_ptr;
 	size_t	i;
 
+	if (new_size == 0)
+		while (new_size == 0 || ((char *)ptr)[new_size - 1])
+			new_size++;
 	new_ptr = malloc(new_size);
 	if (new_ptr == NULL)
 		return (free(ptr), NULL);
 	i = 0;
-	while (i < old_size)
+	while (i < old_size && i < new_size - 1)
 	{
 		((char *)new_ptr)[i] = ((char *)ptr)[i];
 		i++;

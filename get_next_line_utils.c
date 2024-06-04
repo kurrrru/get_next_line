@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:34 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/06/04 20:34:21 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/06/05 02:28:57 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ void	*gnl_realloc(void *ptr, size_t new_size, size_t old_size)
 	if (new_ptr == NULL)
 		return (free(ptr), NULL);
 	i = 0;
-	while (i < old_size && i < new_size - 1)
+	while (i < old_size && i < new_size)
 	{
 		((char *)new_ptr)[i] = ((char *)ptr)[i];
 		i++;
 	}
-	((char *)new_ptr)[i] = '\0';
 	free(ptr);
 	return (new_ptr);
 }
@@ -73,7 +72,10 @@ int	gnl_strncat(char **dst, const char *src, int *line_size, int *cat_size)
 		{
 			*dst = gnl_realloc(*dst, *line_size * 2, *line_size);
 			if (*dst == NULL)
+			{
+				*cat_size = -1;
 				return (-1);
+			}
 			*line_size *= 2;
 		}
 		(*dst)[i + j] = src[j];

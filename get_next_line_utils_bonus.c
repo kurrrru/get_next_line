@@ -48,7 +48,6 @@ void	*gnl_realloc(void *ptr, size_t new_size, size_t old_size)
 		((char *)new_ptr)[i] = ((char *)ptr)[i];
 		i++;
 	}
-	((char *)new_ptr)[i] = '\0';
 	free(ptr);
 	return (new_ptr);
 }
@@ -72,7 +71,10 @@ int	gnl_strncat(char **dst, const char *src, int *line_size, int *cat_size)
 		{
 			*dst = gnl_realloc(*dst, *line_size * 2, *line_size);
 			if (*dst == NULL)
+			{
+				*cat_size = -1;
 				return (-1);
+			}
 			*line_size *= 2;
 		}
 		(*dst)[i + j] = src[j];

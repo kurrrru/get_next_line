@@ -6,11 +6,17 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:39 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/06/04 20:35:41 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/06/05 02:50:53 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static void	free_buf(char **buf)
+{
+	free(*buf);
+	*buf = NULL;
+}
 
 // get_next_line: read a line from a file descriptor
 // If fd is invalid or BUFFER_SIZE is invalid, return NULL.
@@ -30,19 +36,17 @@ char	*get_next_line(int fd)
 	line_size = BUFFER_SIZE + 1;
 	line = (char *)malloc(line_size * sizeof(char));
 	if (!line)
-	{
-		free(buf);
-		buf = NULL;
-		return (NULL);
-	}
+		return (free_buf(&buf), NULL);
 	gnl_bzero(line, line_size);
 	flag = gnl_read(fd, &line, &line_size, buf);
 	if (flag == -1 || flag == 0)
 	{
-		free(buf);
-		buf = NULL;
+		free_buf(&buf);
 		if (flag == -1 || line[0] == '\0')
 			return (free(line), NULL);
 	}
-	return (gnl_realloc(line, 0, line_size));
+	line = gnl_realloc(line, 0, line_size);
+	if (line == NULL)
+		free_buf(&buf);
+	return (line);
 }

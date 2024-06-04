@@ -12,6 +12,12 @@
 
 #include "get_next_line_bonus.h"
 
+static void	free_buf(char **buf)
+{
+	free(*buf);
+	*buf = NULL;
+}
+
 // get_next_line: read a line from a file descriptor
 // If fd is invalid or BUFFER_SIZE is invalid, return NULL.
 // If buf is not initialized, initialize it with buf_init.
@@ -30,19 +36,17 @@ char	*get_next_line(int fd)
 	line_size = BUFFER_SIZE + 1;
 	line = (char *)malloc(line_size * sizeof(char));
 	if (!line)
-	{
-		free(buf[fd]);
-		buf[fd] = NULL;
-		return (NULL);
-	}
+		return (free_buf(buf + fd), NULL);
 	gnl_bzero(line, line_size);
 	flag = gnl_read(fd, &line, &line_size, buf[fd]);
 	if (flag == -1 || flag == 0)
 	{
-		free(buf[fd]);
-		buf[fd] = NULL;
+		free_buf(buf + fd);
 		if (flag == -1 || line[0] == '\0')
 			return (free(line), NULL);
 	}
-	return (gnl_realloc(line, 0, line_size));
+	line = gnl_realloc(line, 0, line_size);
+	if (line == NULL)
+		free_buf(buf + fd);
+	return (line);
 }

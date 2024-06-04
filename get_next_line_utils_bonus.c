@@ -84,8 +84,8 @@ int	gnl_strncat(char **dst, const char *src, int *line_size, int *cat_size)
 // Return: None
 void	gnl_bzero(char *buf, size_t new_size)
 {
-	while (new_size--)
-		buf[new_size] = '\0';
+	while (new_size)
+		buf[--new_size] = '\0';
 }
 
 // gnl_read: Read from fd to buf and concatenate buf to line.

@@ -6,12 +6,13 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:34 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/05/28 12:37:41 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:55:15 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+#include <fcntl.h>
 
 // buf_init: Initialize buf if it is not initialized.
 // After memory allocation, initialize the memory with '\0'.
@@ -84,8 +85,8 @@ int	gnl_strncat(char **dst, const char *src, int *line_size, int *cat_size)
 // Return: None
 void	gnl_bzero(char *buf, size_t new_size)
 {
-	while (new_size--)
-		buf[new_size] = '\0';
+	while (new_size)
+		buf[--new_size] = '\0';
 }
 
 // gnl_read: Read from fd to buf and concatenate buf to line.

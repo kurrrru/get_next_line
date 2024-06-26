@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:43 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/05/05 22:17:16 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/06/27 01:31:16 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int		buf_init(char **buf);
 void	*gnl_realloc(void *ptr, size_t new_size, size_t old_size);
 int		gnl_strncat(char **dst, const char *src, int *line_size, int *cat_size);
 int		gnl_read(int fd, char **line, int *line_size, char *buf);
-void	gnl_bzero(char *buf, size_t size);
+void	gnl_bzero(void *buf, size_t size);
 
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdio.h>
 
 // buf_init: Initialize buf if it is not initialized.
@@ -87,10 +87,10 @@ int	gnl_strncat(char **dst, const char *src, int *line_size, int *cat_size)
 
 // gnl_bzero: Initialize buf with '\0'.
 // Return: None
-void	gnl_bzero(char *buf, size_t new_size)
+void	gnl_bzero(void *buf, size_t size)
 {
-	while (new_size)
-		buf[--new_size] = '\0';
+	while (size)
+		((char *)buf)[--size] = '\0';
 }
 
 // gnl_read: Read from fd to buf and concatenate buf to line.

@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:34 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/06/05 02:28:57 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/06/27 01:32:25 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ int	gnl_strncat(char **dst, const char *src, int *line_size, int *cat_size)
 
 // gnl_bzero: Initialize buf with '\0'.
 // Return: None
-void	gnl_bzero(char *buf, size_t new_size)
+void	gnl_bzero(void *buf, size_t size)
 {
-	while (new_size)
-		buf[--new_size] = '\0';
+	while (size)
+		((char *)buf)[--size] = '\0';
 }
 
 // gnl_read: Read from fd to buf and concatenate buf to line.

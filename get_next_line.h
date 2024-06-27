@@ -6,7 +6,7 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:43 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/06/27 01:31:16 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/06/28 00:35:31 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
-# endif
-
-# ifndef OPEN_MAX
-#  define OPEN_MAX 1024
 # endif
 
 // # define DEBUG

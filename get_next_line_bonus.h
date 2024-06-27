@@ -21,10 +21,6 @@
 #  define BUFFER_SIZE 1024
 # endif
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 1024
-# endif
-
 typedef struct s_node
 {
 	unsigned int	fd;

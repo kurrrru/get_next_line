@@ -11,21 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdio.h>
-
-// buf_init: Initialize buf if it is not initialized.
-// After memory allocation, initialize the memory with '\0'.
-// Return: whether the initialization is successful. (1: success, -1: error)
-int	buf_init(char **buf)
-{
-	if (*buf)
-		return (1);
-	*buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (*buf == NULL)
-		return (-1);
-	gnl_bzero(*buf, BUFFER_SIZE + 1);
-	return (1);
-}
 
 // gnl_realloc: Reallocate memory with new_size.
 // If the reallocation fails, free the original pointer and return NULL.

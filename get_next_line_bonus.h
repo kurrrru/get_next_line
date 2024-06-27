@@ -25,10 +25,16 @@
 #  define OPEN_MAX 1024
 # endif
 
+typedef struct s_node
+{
+	unsigned int	fd;
+	char			*buf;
+	struct s_node	*ch[2];
+}	t_nodes;
+
 // # define DEBUG
 
 char	*get_next_line(int fd);
-int		buf_init(char **buf);
 void	*gnl_realloc(void *ptr, size_t new_size, size_t old_size);
 int		gnl_strncat(char **dst, const char *src, int *line_size, int *cat_size);
 int		gnl_read(int fd, char **line, int *line_size, char *buf);

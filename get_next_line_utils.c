@@ -6,13 +6,11 @@
 /*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:02:34 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/06/27 01:32:25 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/06/28 00:25:18 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
 
 // buf_init: Initialize buf if it is not initialized.
 // After memory allocation, initialize the memory with '\0'.
